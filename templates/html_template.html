@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Twitch Token</title>
+</head>
+<body>
+    <h1 style="text-align: center">Вы можете закрыть это окно</h1>
+    <script>
+        const hash = window.location.hash.substr(1);
+        const params = new URLSearchParams(hash);
+        const token = params.get('access_token');
+
+        if (token) {
+            fetch('/save?token=' + token)
+                .then(() => {
+                    try {
+                        window.close();
+                    } catch(e) {
+                        document.body.innerHTML = '<h1>Токен получен! Закрой это окно</h1>';
+                    }
+                });
+        }
+    </script>
+</body>
+</html>
